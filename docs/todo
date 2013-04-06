@@ -1,0 +1,13 @@
+- put vagrantfile into somewhere easily accessible. (setup a webserver on my local? dropbox?)
+
+version of stuff:
+
+- vagrant http://files.vagrantup.com/packages/64e360814c3ad960d810456add977fd4c7d47ce6/Vagrant.dmg
+- vagrant box http://puppet-vagrant-boxes.puppetlabs.com/debian-606-x64.box
+- virtualbox VirtualBox-4.2.10-84104-OSX.dmg http://dlc.sun.com.edgesuite.net/virtualbox/4.2.10/VirtualBox-4.2.10-84104-OSX.dmg
+
+
+
+
+- fix bug in vagrant 1.1.5 https://github.com/mitchellh/vagrant/commit/8aff752cfb5acc63833f1e5ca114e29915eababb
+- install puppet, facter, hiera locally on macosx

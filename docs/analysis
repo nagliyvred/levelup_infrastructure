@@ -1,0 +1,41 @@
+
+============
+As a student,
+I want to have my vagrant box ready
+So that I can start playing with it
+============
+As a student,
+I want to have my app deployed to my local vagrant
+So that I can see the deployment process
+============
+As a teacher
+I want to puppetise the deployment process
+So that I can demonstrate it to students
+============
+As a student
+I want to have Go server setup 
+So that it shows me app build and deployment pipeline
+============
+As a student 
+I want to have Go server setup
+So that it shows me infrastructure pipeline
+============
+As a student
+I want to be able to compile infrastructure locally
+So that I know it works before checking in
+============
+As a teacher
+I want to have mcollective setup and an agent ready
+So that I can demonstrate automatic deployment to all boxes in the collective
+============
+As a teacher
+I want to have a 'deploy to prod' pipeline step setup 
+So that I can demonstrate my students the importance of pipelines and environments
+============
+As a teacher 
+I want to have a script ready 
+So that I can bootstrap every student machine easily
+============
+As a student
+I want to have prereading information 
+So that I can be prepared for the session
