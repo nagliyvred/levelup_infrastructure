@@ -3,10 +3,9 @@
     logdir = /var/log/puppet
     rundir = /var/run/puppet
     ssldir = $vardir/ssl
-    manifest = /data/puppet_code/$environment/levelup_infrastructure/puppet/manifests/main.pp
+    manifest = /data/puppet_code/$environment/levelup_infrastructure/puppet/manifests/site.pp
     modulepath = /data/puppet_code/$environment/levelup_infrastructure/puppet/modules
     pluginsync = true
-    masterport = 443
 
 [agent]
     localconfig = $vardir/localconfig
