@@ -9,7 +9,7 @@ class puppetmaster {
   }
 
   file { "/etc/puppet/hiera.yaml":
-    source => "puppet://puppetmaster/hiera.yaml",
+    content => template("puppetmaster/hiera.yaml"),
     ensure => present
   }
 }
