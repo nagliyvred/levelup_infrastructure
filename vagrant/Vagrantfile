@@ -11,6 +11,7 @@ Vagrant::Config.run do |config|
   # an identifier, the second is the path on the guest to mount the
   # folder, and the third is the path on the host to the actual folder.
   config.vm.share_folder "vagrant-share", "/vagrant/share", "share"
+  config.vm.share_folder "git-share", "/vagrant/infrastructure", "../puppet" 
   config.vm.forward_port 80, 9080, :auto => true
   config.vm.forward_port 443, 9443, :auto => true
 

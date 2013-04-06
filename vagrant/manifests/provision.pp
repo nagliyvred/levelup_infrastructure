@@ -21,5 +21,26 @@ class provision {
     require => File["/etc/puppet"]
   }
 
+  package { "git":
+    ensure => installed,
+    provider => "apt"
   }
+
+  package { "vim":
+    ensure => installed,
+    provider => apt
+    }
+
+  file {"/etc/apt/sources.list":
+    source => "/vagrant/share/sources.list"
+    ensure => present
+  }
+
+  exec { "apt-get update":
+    command => "apt-get update",
+    subscribe => File["/etc/apt/sources.list"],
+    refreshonly => true
+  }
+
+}
 

@@ -1,0 +1,20 @@
+[main]
+    vardir = /var/lib/puppet
+    logdir = /var/log/puppet
+    rundir = /var/run/puppet
+    ssldir = $vardir/ssl
+    manifest = /usr/share/puppet-recipes/$environment/puppet-environments/puppet/manifests/site.pp
+    modulepath = /usr/share/puppet-recipes/$environment/puppet-environments/puppet/modules
+    pluginsync = true
+    masterport = 443
+
+[agent]
+    localconfig = $vardir/localconfig
+    report = false
+    onetime = true
+    daemonize = false
+    show_diff = true
+
+[master]
+    ssl_client_header = SSL_CLIENT_S_DN
+    ssl_client_verify_header = SSL_CLIENT_VERIFY
