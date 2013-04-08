@@ -1,0 +1,77 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:amq="http://activemq.apache.org/schema/core"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                           http://www.springframework.org/schema/beans/spring-beans-2.0.xsd
+                           http://activemq.apache.org/schema/core
+                           http://activemq.apache.org/schema/core/activemq-core.xsd">
+
+  <broker xmlns="http://activemq.apache.org/schema/core" brokerName="<%= fqdn %>" useJmx="true">
+
+    <destinationPolicy>
+      <policyMap>
+        <policyEntries>
+          <policyEntry topic=">" producerFlowControl="false" memoryLimit="50mb">
+            <pendingSubscriberPolicy>
+                <fileCursor />
+            </pendingSubscriberPolicy>
+          </policyEntry>
+        </policyEntries>
+      </policyMap>
+    </destinationPolicy>
+
+    
+
+     <plugins>
+<authorizationPlugin>
+            <map>
+              <authorizationMap>
+                <authorizationEntries>
+                  <authorizationEntry queue=">" write="admins" read="admins" admin="admins" />
+                  <authorizationEntry topic=">" write="admins" read="admins" admin="admins" />
+                  <authorizationEntry topic="mcollective.>" write="mcollective" read="mcollective" admin="mcollective" />
+                  <authorizationEntry queue="mcollective.>" write="mcollective" read="mcollective" admin="mcollective" />
+                  <!--
+                    The advisory topics are part of ActiveMQ, and all users need access to them.
+                    The "everyone" group is not special; you need to ensure every user is a member.
+                  -->
+                  <authorizationEntry topic="ActiveMQ.Advisory.>" read="everyone" write="everyone" admin="everyone"/>
+                </authorizationEntries>
+              </authorizationMap>
+            </map>
+          </authorizationPlugin>
+ <simpleAuthenticationPlugin>
+       <users>
+         <authenticationUser username="mcollective" password="marionette" groups="mcollective,everyone"/>
+         <authenticationUser username="admin" password="secret" groups="mcollective,admins,everyone"/>
+       </users>
+    </simpleAuthenticationPlugin>
+
+
+
+    </plugins>
+
+   
+
+    <systemUsage>
+      <systemUsage sendFailIfNoSpace="true">
+        <memoryUsage>
+          <memoryUsage limit="512 mb" />
+        </memoryUsage>
+        <storeUsage>
+          <storeUsage limit="30 gb" />
+        </storeUsage>
+        <tempUsage>
+          <tempUsage limit="5 gb" />
+        </tempUsage>
+      </systemUsage>
+    </systemUsage>
+
+    <transportConnectors>
+      <transportConnector name="stomp" uri="stomp://0.0.0.0:6163"/>
+    </transportConnectors>
+
+  </broker>
+
+
+</beans>

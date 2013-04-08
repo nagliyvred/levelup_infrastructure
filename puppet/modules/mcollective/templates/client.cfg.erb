@@ -1,0 +1,15 @@
+topicprefix = /topic/
+libdir = /usr/share/mcollective/plugins 
+logfile = /var/log/mcollective_client.log
+collectives = mcollective
+main_collective = mcollective
+loglevel = info
+securityprovider = psk
+plugin.psk = theSecretKey
+connector = stomp
+
+plugin.stomp.host = localhost
+plugin.stomp.port = 6163
+plugin.stomp.user = mcollective
+plugin.stomp.password = marionette 
+

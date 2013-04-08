@@ -32,14 +32,16 @@ class provision {
     }
 
   file {"/etc/apt/sources.list":
-    source => "/vagrant/share/sources.list"
+    source => "/vagrant/share/sources.list",
     ensure => present
   }
 
   exec { "apt-get update":
     command => "apt-get update",
     subscribe => File["/etc/apt/sources.list"],
-    refreshonly => true
+    refreshonly => true,
+
+
   }
 
 }

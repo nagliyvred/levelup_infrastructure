@@ -1,0 +1,25 @@
+topicprefix = /topic/
+libdir = /usr/share/mcollective/plugins 
+logfile = /var/log/mcollective.log
+collectives = mcollective
+main_collective = mcollective
+loglevel = info
+daemonize = 1
+securityprovider = psk
+plugin.psk = theSecretKey
+connector = stomp
+
+plugin.stomp.host = master.levelup
+plugin.stomp.port = 6163
+plugin.stomp.user = mcollective
+plugin.stomp.password = marionette 
+
+factsource = yaml
+plugin.yaml = /etc/mcollective/facts.yaml
+
+plugin.puppet.command = puppet apply --modulepath=/vagrant/infrastructure/modules --verbose /vagrant/infrastructure/manifests/site.pp > /var/log/puppet/apply.log
+plugin.puppet.splay = false 
+plugin.puppet.splaylimit = 1 
+plugin.puppet.config = /etc/puppet/puppet.conf
+#registerinterval = 30
+#registration = AgentList
