@@ -10,6 +10,7 @@ module MCollective
           if status != 0 
             Log.info("Failed to remove: #{msg}")
             reply[:msg] = "deployment FAILED: #{msg}"
+            reply[:status] = status
             return
           end
 
@@ -17,6 +18,7 @@ module MCollective
           if status != 0 
             Log.info("Failed to remove: #{msg}")
             reply[:msg] = "deployment FAILED: #{msg}"
+            reply[:status] = status
             return
           end
           Log.debug("deploy finished with: #{msg}")

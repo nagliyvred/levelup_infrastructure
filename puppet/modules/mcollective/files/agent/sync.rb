@@ -9,6 +9,7 @@ module MCollective
         if status != 0
           Log.info("git pull failed: #{status} #{msg}")
           reply[:msg] = "sync FAILED: #{msg}"
+          reply[:status] = status
           return
         end
 
@@ -16,6 +17,7 @@ module MCollective
         if status != 0
           Log.info("git checkout status: #{status} #{msg}")
           reply[:msg] = "sync FAILED: #{msg}"
+          reply[:status] = status
           return
         end
         Log.info("sync done: #{msg}")
