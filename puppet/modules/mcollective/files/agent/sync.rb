@@ -3,12 +3,23 @@ module MCollective
     class Sync<RPC::Agent
       action "sync" do
  
-        msg = ""  
-        puts "running sync"
-        run('git pull', :stdout => msg, :stderr => msg, :cwd => "/data/puppet_code/levelup_infrastructure/")
-        run("git checkout HEAD", :stdout => msg, :stderr => msg)
-        puts "sync done: #{msg}"
-        reply[:msg] = "#{msg}\nsynced OK"
+        msg = []  
+        Log.info("syncronising host repo - revision #{request[:revision]}")
+        status = run('git pull', :stdout => msg, :stderr => msg, :cwd => "/data/puppet_code/levelup_infrastructure/")
+        if status != 0
+          Log.info("git pull failed: #{status} #{msg}")
+          reply[:msg] = "sync FAILED: #{msg}"
+          return
+        end
+
+        status = run("git checkout HEAD", :stdout => msg, :stderr => msg, :cwd => "/data/puppet_code/levelup_infrastructure/")
+        if status != 0
+          Log.info("git checkout status: #{status} #{msg}")
+          reply[:msg] = "sync FAILED: #{msg}"
+          return
+        end
+        Log.info("sync done: #{msg}")
+        reply[:msg] = "sync SUCCESS"
       end
 
     end
