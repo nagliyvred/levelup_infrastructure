@@ -19,7 +19,11 @@ plugin.yaml = /etc/mcollective/facts.yaml
 
 plugin.puppet.command = puppet apply --modulepath=/data/puppet_code/levelup_infrastructure/puppet/modules --verbose /data/puppet_code/levelup_infrastructure/puppet/manifests/site.pp 
 plugin.puppet.splay = false 
-plugin.puppet.splaylimit = 1 
+plugin.puppet.daemonize = true 
 plugin.puppet.config = /etc/puppet/puppet.conf
+
+plugin.service.mcollective.hasstatus = true
+plugin.service.mcollective.hasrestart = true
+
 #registerinterval = 30
 #registration = AgentList
