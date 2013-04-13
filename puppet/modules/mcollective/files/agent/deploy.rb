@@ -14,7 +14,7 @@ module MCollective
             return
           end
 
-          status = run("apt-get update && apt-get install testinvaders  --yes --force-yes", :stdout => msg, :stderr => msg)
+          status = run("apt-get update && apt-get install testinvaders=#{version}  --yes --force-yes", :stdout => msg, :stderr => msg)
           if status != 0 
             Log.info("Failed to remove: #{msg}")
             reply[:msg] = "deployment FAILED: #{msg}"
