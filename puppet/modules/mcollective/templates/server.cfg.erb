@@ -17,7 +17,7 @@ plugin.stomp.password = marionette
 factsource = yaml
 plugin.yaml = /etc/mcollective/facts.yaml
 
-plugin.puppet.command = puppet apply --modulepath=/data/puppet_code/levelup_infrastructure/puppet/modules --verbose /data/puppet_code/levelup_infrastructure/puppet/manifests/site.pp 
+plugin.puppet.command = puppet apply --modulepath=/data/puppet_code/levelup_infrastructure/puppet/modules --verbose /data/puppet_code/levelup_infrastructure/puppet/manifests/site.pp --logdest=/var/log/puppet.log
 plugin.puppet.splay = false 
 plugin.puppet.daemonize = true 
 plugin.puppet.config = /etc/puppet/puppet.conf
