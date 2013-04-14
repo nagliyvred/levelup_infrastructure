@@ -35,39 +35,59 @@ class mcollective {
     backup => false
   }
 
-  file { "/usr/share/mcollective/plugins/mcollective/agent/deploy.ddl": 
+  mcollective::agent { "deploy": agent_name => "deploy" }
+  mcollective::agent { "sync":   agent_name => "sync" }
+  mcollective::agent { "puppet": agent_name => "puppet" }
+
+#  file { "/usr/share/mcollective/plugins/mcollective/agent/deploy.ddl": 
+#    ensure => present,
+#    source => "puppet:///modules/mcollective/agent/deploy.ddl",
+#    #recurse => true,
+#    replace => true,
+#    owner => "root",
+#    group => "root"
+#  }
+#  file { "/usr/share/mcollective/plugins/mcollective/agent/deploy.rb": 
+#    ensure => present,
+#    source => "puppet:///modules/mcollective/agent/deploy.rb",
+#    #recurse => true,
+#    replace => true,
+#    owner => "root",
+#    group => "root"
+#  }
+#  file { "/usr/share/mcollective/plugins/mcollective/agent/sync.ddl": 
+#    ensure => present,
+#    source => "puppet:///modules/mcollective/agent/sync.ddl",
+#    #recurse => true,
+#    replace => true,
+#    owner => "root",
+#    group => "root"
+#  }
+#  file { "/usr/share/mcollective/plugins/mcollective/agent/sync.rb": 
+#    ensure => present,
+#    source => "puppet:///modules/mcollective/agent/sync.rb",
+#    #recurse => true,
+#    replace => true,
+#    owner => "root",
+#    group => "root"
+#  }
+
+ define mcollective::agent($agent_name) {
+
+  file { "/usr/share/mcollective/plugins/mcollective/agent/$agent_name.ddl": 
     ensure => present,
-    source => "puppet:///modules/mcollective/agent/deploy.ddl",
-    #recurse => true,
+    source => "puppet:///modules/mcollective/agent/$agent_name.ddl",
     replace => true,
     owner => "root",
     group => "root"
   }
-  file { "/usr/share/mcollective/plugins/mcollective/agent/deploy.rb": 
+  file { "/usr/share/mcollective/plugins/mcollective/agent/$agent_name.rb": 
     ensure => present,
-    source => "puppet:///modules/mcollective/agent/deploy.rb",
-    #recurse => true,
-    replace => true,
-    owner => "root",
-    group => "root"
-  }
-  file { "/usr/share/mcollective/plugins/mcollective/agent/sync.ddl": 
-    ensure => present,
-    source => "puppet:///modules/mcollective/agent/sync.ddl",
-    #recurse => true,
-    replace => true,
-    owner => "root",
-    group => "root"
-  }
-  file { "/usr/share/mcollective/plugins/mcollective/agent/sync.rb": 
-    ensure => present,
-    source => "puppet:///modules/mcollective/agent/sync.rb",
-    #recurse => true,
+    source => "puppet:///modules/mcollective/agent/$agent_name.rb",
     replace => true,
     owner => "root",
     group => "root"
   }
 
-
-
+ }
 }
