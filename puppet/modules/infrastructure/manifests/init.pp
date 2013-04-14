@@ -13,7 +13,7 @@ class infrastructure {
     group => "root",
     mode => 0655,
     content => template('infrastructure/run_sync.sh'),
-    requires => File["/opt/build"]
+    require => File["/opt/build"]
    }
 
   file { "/opt/infrastructure/bin/deploy.sh":
@@ -22,7 +22,7 @@ class infrastructure {
     group => "root",
     mode => 0655,
     content => template('infrastructure/deploy.sh'),
-    requires => File["/opt/build"]
+    require => File["/opt/build"]
    }
 
   file { "/opt/infrastructure/bin/heroku.sh":
@@ -31,7 +31,7 @@ class infrastructure {
     group => "root",
     mode => 0655,
     content => template('infrastructure/heroku.sh'),
-    requires => File["/opt/build"]
+    require => File["/opt/build"]
    }
 
 
