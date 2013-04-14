@@ -1,26 +1,38 @@
 class infrastructure {
 
+  file { "/opt/build":
+    ensure => directory,
+    owner => "root",
+    group => "root",
+    mode => 0655
+  }
 
-  file { "/usr/bin/run_puppet.sh":
+  file { "/opt/infrastructure/bin/run_sync.sh":
     ensure => present,
     owner => "root",
     group => "root",
     mode => 0655,
-    content => template('infrastructure/run_puppet.sh')
+    content => template('infrastructure/run_sync.sh'),
+    requires => File["/opt/build"]
    }
 
-  file { "/usr/bin/run_sync.sh":
+  file { "/opt/infrastructure/bin/deploy.sh":
     ensure => present,
     owner => "root",
     group => "root",
     mode => 0655,
-    content => template('infrastructure/run_sync.sh')
+    content => template('infrastructure/deploy.sh'),
+    requires => File["/opt/build"]
    }
 
-
-  notify { "infrastructure":
-    message => "infrastructure"
-    }
+  file { "/opt/infrastructure/bin/heroku.sh":
+    ensure => present,
+    owner => "root",
+    group => "root",
+    mode => 0655,
+    content => template('infrastructure/heroku.sh'),
+    requires => File["/opt/build"]
+   }
 
 
 }
