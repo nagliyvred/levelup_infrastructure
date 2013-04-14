@@ -16,6 +16,7 @@ Vagrant::Config.run do |config|
   config.vm.share_folder "git-share", "/vagrant/infrastructure", "../puppet" 
   config.vm.forward_port 80, 9080, :auto => true
   config.vm.forward_port 443, 9443, :auto => true
+  config.vm.forward_port 9090, 9090, :auto => true
 
   config.vm.host_name = "#{ENV['LEVELUP_HOST']}"
   config.vm.customize ['modifyvm', :id, '--memory', '512']
