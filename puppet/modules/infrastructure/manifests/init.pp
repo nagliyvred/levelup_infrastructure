@@ -1,6 +1,6 @@
 class infrastructure {
 
-  file { "/opt/build":
+  file { "/opt/infrastructure":
     ensure => directory,
     owner => "root",
     group => "root",

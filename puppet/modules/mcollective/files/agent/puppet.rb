@@ -158,9 +158,10 @@ module MCollective
           when :run_in_background
             Log.debug("Initiating a background puppet agent run using the command: %s" % command)
             errlog = []
-            exitcode = run(command, :stdout => :log, :stderr => errlog, :chomp => true)
+            exitcode = run("#{command} --detailed-exitcodes", :stdout => :log, :stderr => errlog, :chomp => true)
             reply[:log] << errlog.join('')
             Log.info("log: #{reply[:log]} ")
+            exitcode = 0 if exitcode == 2
 
             unless exitcode == 0
               reply.fail!(reply[:summary] = "Puppet command '%s' had exit code %d, expected 0" % [command, exitcode])
