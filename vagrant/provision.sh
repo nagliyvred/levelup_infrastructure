@@ -23,4 +23,4 @@ EOF
 echo "127.0.0.1       $1 $1.levelup    localhost" >> /etc/hosts
 echo "setting ip $2"
 /sbin/ifconfig eth1 $2
-
+/etc/init.d/mcollective restart
