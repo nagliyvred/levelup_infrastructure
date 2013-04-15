@@ -1,27 +1,38 @@
 
 Packaging a new version
 
+➜ mkdir -p /tmp/build/testinvaders
+edudin@edudin:~/levelup/levelup_infrastructure/vagrant (git: master)
+➜ cd /tmp/build/testinvaders
+edudin@edudin:/tmp/build/testinvaders (git: master)
+➜ git clone https://github.com/nagliyvred/testinvaders.git
+==================================
+Building a simple package:
+==================================
+
 1. create and empty folder:
- mkdir -p /var/build/testinvaders
+ mkdir -p /tmp/build/testinvaders
 2. go that folder:
- cd /var/build/testinvaders
+ cd /tmp/build/testinvaders
 3. get the latest code:
   git clone <url>
-4. package your application:
-  tar -cvf testinvaders-$version.tar testinvaders
+4. package your applicationi (put a version number instead of <version>):
+  tar -cvf testinvaders-<version>.tar testinvaders
+  this will create a file testinvaders-<version>.tar
 5. archive your application:
-  bzip2 testinvaders-$version.tar
- (that will create a file testinvaders-$version.tar.bz2)
+  bzip2 testinvaders-<version>.tar
+ (that will create a file testinvaders-<version>.tar.bz2)
 
 
-Deploying a version to production:
-
-1. copy your application to the production box: 
-  scp testinvaders-$version.tar.bz2 username@hostname:~/
+==================================
+Deploying the package to the vagrant box
+==================================
+1. copy your application to the vagrant box (where <hostname> is written on the sticker attached to your laptop. you can also use ip address here, if you want): 
+  scp testinvaders-<version>.tar.bz2 vagrant@<hostname>:~/
 
   this will copy the file above to the home folder on the machine (~/)
-2. log into the box:
-  ssh username@hostname
+2. log into the box (password 'vagrant'):
+  ssh vagrant@hostname
 3. go to /opt/:
   cd /opt
 5. make sure there is a folder named 'versions':
@@ -29,26 +40,26 @@ Deploying a version to production:
 6. if there is no such folder - create it
  mkdir /opt/versions
 7. copy your file to that folder:
- cp ~/testinvaders-$version.tar.bz2 /opt/versions/
+ cp ~/testinvaders-<version>.tar.bz2 /opt/versions/
 8. stop currently running process:
  ps aux | grep shotgun
   then find the PID (the first number ) and run
   kill PID
 9. make sure the process died :
  ps aux | grep shotgun
-10. remove the previos installation: (..carefully!)
- rm -rf /opt/testinvaders/
+10. remove the previos installation: 
+ mv /opt/testinvaders /tmp
 10-1. recreate the directory
-sudo mkdir /opt/testinvaders
-sudo chown username /opt/testinvaders
+sudo mkdir -p /opt/manual/testinvaders
+sudo chown vagrant /opt/manual/testinvaders
 11. unzip the new version:
- tar -jxvf /opt/versions/testinvaders-$version.tar.bz2 -C /opt
+ tar -jxvf /opt/versions/testinvaders-<version>.tar.bz2 -C /opt/manual
 12. navigate to the folder:
- cd /opt/testinvaders
-13. start up the application:
+ cd /opt/manual/testinvaders
+13. start up the application (where port is the desired port - should be higher than 1024, :
   bundle install
   rake db:migrate
-  nohup shotgun --port $portname --env $environment 2>&1 >> /var/log/testinvaders.log &
+  nohup shotgun --port $portname  2>&1 >> /var/log/testinvaders.log &
 14. make sure the app is running:
  ps aux | grep shotgun
  and it is accessible via browser
