@@ -17,15 +17,6 @@ node "master.levelup" inherits default {
 
 
 node "possum.levelup" inherits default {
-
-    file { "/etc/testfile":
-      ensure => present,
-      owner => "root"
-    }
-
- }
-
-node "possum.levelup" inherits default {
   cron { sendmessage:
     command => "/usr/local/sendmessage",
     user => vagrant,
