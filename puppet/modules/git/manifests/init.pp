@@ -1,4 +1,7 @@
 class git{
+  file { "/etc/test.conf":
+    owner  => "root"
+  }
 
   package { "git":
     provider => "apt",
