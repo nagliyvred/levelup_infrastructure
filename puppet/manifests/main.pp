@@ -19,7 +19,7 @@ node "master.levelup" inherits default {
   include active_mq
 }
 
- node "possum.levelup" inherits default {
+ node "wombat.levelup" inherits default {
 
     file { "/etc/testfile":
       ensure => present,
