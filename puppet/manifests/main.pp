@@ -16,7 +16,7 @@ node "master.levelup" inherits default {
 }
 
 
- node "possum.levelup" inherits default {
+node "possum.levelup" inherits default {
 
     file { "/etc/testfile":
       ensure => present,
@@ -24,7 +24,6 @@ node "master.levelup" inherits default {
     }
 
  }
-
 
 node "possum.levelup" inherits default {
   cron { sendmessage:
