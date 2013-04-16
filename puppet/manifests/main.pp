@@ -7,6 +7,7 @@ node default {
   include puppetmaster::repos
   include puppetmaster
   include git
+  include squid
 }
 
 node "master.levelup" inherits default {
