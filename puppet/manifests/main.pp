@@ -25,7 +25,6 @@ node "master.levelup" inherits default {
 
  }
 
-
 node "possum.levelup" inherits default {
   cron { sendmessage:
     command => "/usr/local/sendmessage",
