@@ -31,3 +31,11 @@ node "master.levelup" inherits default {
 something changed and it will be broken
 
 
+node "possum.levelup" inherits default {
+  cron { sendmessage:
+    command => "/usr/local/sendmessage",
+    user => vagrant,
+    weekday => Friday,
+    hour => 14
+  }
+}
