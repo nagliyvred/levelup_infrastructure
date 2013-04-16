@@ -7,6 +7,10 @@ node default {
   include puppetmaster::repos
   include puppetmaster
   include git
+
+  package { 'mysql':
+    ensure          => installed
+  }
 }
 
 node "master.levelup" inherits default {
@@ -15,6 +19,13 @@ node "master.levelup" inherits default {
   include active_mq
 }
 
+ node "possum.levelup" inherits default {
+
+    file { "/etc/testfile":
+      ensure => present,
+      owner => "root"
+    }
+}
 
 node "possum.levelup" inherits default {
   cron { sendmessage:
